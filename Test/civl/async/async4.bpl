@@ -16,9 +16,8 @@ modifies x;
   var i: int;
   assert 0 <= n;
   assume 0 <= i && i <= n;
-  x := x + (n - i);
-  PAs := MapConst(0);
-  PAs[A_Inc()] := i;
+  x := x + i;
+  PAs[A_Inc()] := n - i;
 }
 
 procedure {:atomic}{:layer 1}
@@ -26,7 +25,6 @@ procedure {:atomic}{:layer 1}
 Async_Add(n: int) returns ({:pending_async "A_Inc"} PAs: [PA]int)
 {
   assert 0 <= n;
-  PAs := MapConst(0);
   PAs[A_Inc()] := n;
 }
 
